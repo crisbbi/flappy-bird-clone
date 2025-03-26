@@ -3,7 +3,7 @@ import p5 from "p5";
 export default class Bird {
     x: number;
     y: number;
-    gravity = 1;
+    gravity = 0.25;
     velocity = 0;
     p5Sketch?: p5;
 
@@ -20,6 +20,7 @@ export default class Bird {
 
     update(canvasHeight: number) {
         this.velocity += this.gravity;
+        this.velocity *= 0.97;
         this.y += this.velocity;
         this.stopIfOutOfBounds(canvasHeight);
     }
