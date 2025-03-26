@@ -1,12 +1,11 @@
-import p5 from "p5"
-
+import p5 from "p5";
 
 export default class Bird {
-    x: number
-    y: number
-    gravity = 1
-    velocity = 0
-    p5Sketch?: p5
+    x: number;
+    y: number;
+    gravity = 1;
+    velocity = 0;
+    p5Sketch?: p5;
 
     constructor(p5Sketch: p5 | undefined = undefined, x: number, y: number) {
         this.x = x;
@@ -22,7 +21,10 @@ export default class Bird {
     update(canvasHeight: number) {
         this.velocity += this.gravity;
         this.y += this.velocity;
+        this.stopIfOutOfBounds(canvasHeight);
+    }
 
+    stopIfOutOfBounds(canvasHeight: number) {
         if (this.y + 10 > canvasHeight) {
             this.y = canvasHeight - 10;
             this.velocity = 0;
@@ -31,7 +33,5 @@ export default class Bird {
             this.y = 10;
             this.velocity = 0;
         }
-
     }
-
 }
