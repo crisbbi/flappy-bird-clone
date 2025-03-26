@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "devDependencies": {
     "typescript": "~5.7.2",
@@ -15,6 +16,8 @@
   },
   "dependencies": {
     "@types/p5": "^1.7.6",
-    "eslint": "^9.23.0"
+    "eslint": "^9.23.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0"
   }
 }
