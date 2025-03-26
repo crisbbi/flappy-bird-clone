@@ -4,10 +4,10 @@ import Bird from "./bird";
 const a = new p5((sketch: p5) => {
     let x = 100;
     let y = 100;
-    let boxWidth = 50
-    let boxHeight = 50
-    const canvasHeight = 400
-    const canvasWidth = 400
+    let boxWidth = 50;
+    let boxHeight = 50;
+    const canvasHeight = 400;
+    const canvasWidth = 400;
     let bird = new Bird(sketch, x, y);
 
     sketch.setup = () => {
@@ -20,11 +20,11 @@ const a = new p5((sketch: p5) => {
         sketch.rect(x, y, boxWidth, boxHeight);
         bird.show();
         bird.update(canvasHeight);
+    };
 
-        if (y + boxHeight < canvasHeight) {
-            y++
+    sketch.keyPressed = () => {
+        if (sketch.key === " ") {
+            bird.up();
         }
     };
 });
-
-

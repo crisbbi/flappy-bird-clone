@@ -21,3 +21,13 @@ test("If the bird hits the ceiling, its y position should be set to the ceiling 
     expect(bird.y).toBe(10);
     expect(bird.velocity).toBe(0);
 });
+
+test("The bird should get negative velocity when it's pushed up, such that it moves upwards", () => {
+    const yPosition = 50;
+    const bird = new Bird(undefined, 50, yPosition);
+    const oldVelocity = bird.velocity;
+
+    bird.up();
+
+    expect(bird.velocity).toBeLessThan(oldVelocity);
+});
