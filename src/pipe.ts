@@ -14,8 +14,8 @@ export default class Pipe {
         this.p5Sketch = p5Sketch;
         this.x = p5Sketch?.width ?? Number.MAX_SAFE_INTEGER;
         this.canvasHeight = p5Sketch?.height ?? 0;
-        this.topPipeHeight = this.p5Sketch?.random(this.p5Sketch.height / 2) ?? 0;
-        this.bottomPipeHeight = this.p5Sketch?.random(this.p5Sketch.height / 2) ?? 0;
+        this.topPipeHeight = this.p5Sketch?.random(this.p5Sketch.height * 0.8) ?? 0;
+        this.bottomPipeHeight = this.canvasHeight - this.topPipeHeight - 95;
     }
 
     show() {
