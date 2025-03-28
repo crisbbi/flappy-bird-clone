@@ -9,6 +9,7 @@ export default class Pipe {
     canvasHeight: number;
     p5Sketch?: p5;
     speed = 2;
+    highlight = false;
 
     constructor(p5Sketch: p5 | undefined = undefined) {
         this.p5Sketch = p5Sketch;
@@ -20,6 +21,9 @@ export default class Pipe {
 
     show() {
         this.p5Sketch?.fill(255);
+        if (this.highlight) {
+            this.p5Sketch?.fill("red");
+        }
         this.p5Sketch?.rect(this.x, 0, this.width, this.topPipeHeight);
         const pipeStartHeight = this.canvasHeight - this.bottomPipeHeight;
         this.p5Sketch?.rect(this.x, pipeStartHeight, this.width, this.bottomPipeHeight);
@@ -34,8 +38,10 @@ export default class Pipe {
         const birdIsTooLow = bird.y + bird.radius >= this.canvasHeight - this.bottomPipeHeight;
         const birdIsBetweenPipes = bird.x + bird.radius >= this.x && bird.x + bird.radius <= this.x + this.width;
         if (birdIsBetweenPipes && (birdIsTooHigh || birdIsTooLow)) {
+            this.highlight = true;
             return true;
         }
+        this.highlight = false;
         return false;
     }
 }

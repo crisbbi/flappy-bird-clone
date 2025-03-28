@@ -94,4 +94,16 @@ describe("Collision detection between the pipe and the bird", () => {
 
         expect(collisionResult).toBe(false);
     });
+
+    it("If the bird collides with a pipe, the pipes should be highlighted", () => {
+        const pipe = new Pipe(undefined);
+        pipe.x = 50;
+        pipe.topPipeHeight = 30;
+        pipe.bottomPipeHeight = 20;
+        pipe.canvasHeight = 100;
+        const bird = new Bird(undefined, 50, 0);
+
+        pipe.isColliding(bird);
+        expect(pipe.highlight).toBe(true);
+    });
 });
