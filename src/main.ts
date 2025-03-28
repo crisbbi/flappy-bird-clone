@@ -26,6 +26,9 @@ const a = new p5((sketch: p5) => {
         for (let index = pipes.length - 1; index >= 0; index--) {
             pipes[index].show();
             pipes[index].updatePipePosition();
+            if (pipes[index].isColliding(bird)) {
+                console.log("Collision detected! pipe", index + 1);
+            }
 
             if (pipes[index].x + pipes[index].width < -10) {
                 pipes.splice(index, 1);

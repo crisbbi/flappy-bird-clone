@@ -6,6 +6,7 @@ export default class Bird {
     gravity = 0.25;
     velocity = 0;
     p5Sketch?: p5;
+    radius = 10;
 
     constructor(p5Sketch: p5 | undefined = undefined, x: number, y: number) {
         this.x = x;
@@ -26,12 +27,12 @@ export default class Bird {
     }
 
     stopIfOutOfBounds(canvasHeight: number) {
-        if (this.y + 10 > canvasHeight) {
-            this.y = canvasHeight - 10;
+        if (this.y + this.radius > canvasHeight) {
+            this.y = canvasHeight - this.radius;
             this.velocity = 0;
         }
-        if (this.y + 10 <= 0) {
-            this.y = 10;
+        if (this.y - this.radius <= 0) {
+            this.y = this.radius;
             this.velocity = 0;
         }
     }
