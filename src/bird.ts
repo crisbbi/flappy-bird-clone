@@ -38,6 +38,6 @@ export default class Bird {
     }
 
     up() {
-        this.velocity -= 8;
+        this.velocity = -6;
     }
 }
