@@ -31,7 +31,7 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.topPipeHeight = 250;
         const bird = new Bird(undefined, 45, 200);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(true);
     });
@@ -43,7 +43,7 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 300;
         const bird = new Bird(undefined, 45, 200);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(true);
     });
@@ -54,7 +54,7 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.topPipeHeight = 50;
         const bird = new Bird(undefined, 55, 60);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(true);
     });
@@ -66,7 +66,7 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 100;
         const bird = new Bird(undefined, 55, 40);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(true);
     });
@@ -79,7 +79,7 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 100;
         const bird = new Bird(undefined, 55, 50);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(false);
     });
@@ -90,7 +90,7 @@ describe("Collision detection between the pipe and the bird", () => {
         const birdradius = 10;
         const bird = new Bird(undefined, pipe.x + pipe.width + birdradius + 1, 50);
 
-        const collisionResult = pipe.isColliding(bird);
+        const collisionResult = pipe.highlightCollisionOnNextRender(bird);
 
         expect(collisionResult).toBe(false);
     });

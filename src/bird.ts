@@ -19,7 +19,7 @@ export default class Bird {
         this.p5Sketch?.ellipse(this.x, this.y, 20, 20);
     }
 
-    update(canvasHeight: number) {
+    updatePosition(canvasHeight: number) {
         this.velocity += this.gravity;
         this.velocity *= 0.97;
         this.y += this.velocity;

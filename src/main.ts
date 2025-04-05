@@ -18,7 +18,7 @@ const a = new p5((sketch: p5) => {
         sketch.background(0);
         sketch.fill(255);
         bird.show();
-        bird.update(canvasHeight);
+        bird.updatePosition(canvasHeight);
 
         if (sketch.frameCount % 100 === 0) {
             pipes.push(new Pipe(sketch));

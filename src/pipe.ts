@@ -33,7 +33,7 @@ export default class Pipe {
         this.x -= this.speed;
     }
 
-    isColliding(bird: Bird) {
+    highlightCollisionOnNextRender(bird: Bird) {
         const birdIsTooHigh = bird.y + bird.radius <= this.topPipeHeight;
         const birdIsTooLow = bird.y + bird.radius >= this.canvasHeight - this.bottomPipeHeight;
         const birdIsBetweenPipes = bird.x + bird.radius >= this.x && bird.x + bird.radius <= this.x + this.width;
