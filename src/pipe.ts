@@ -39,9 +39,8 @@ export default class Pipe {
         const birdIsBetweenPipes = bird.x + bird.radius >= this.x && bird.x + bird.radius <= this.x + this.width;
         if (birdIsBetweenPipes && (birdIsTooHigh || birdIsTooLow)) {
             this.highlight = true;
-            return true;
+            return;
         }
         this.highlight = false;
-        return false;
     }
 }
