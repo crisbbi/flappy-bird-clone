@@ -32,10 +32,10 @@ export default class Bird {
             this.y = canvasHeight - this.radius;
             this.velocity = 0;
         }
-        if (this.y - this.radius <= 0) {
-            this.y = this.radius;
-            this.velocity = 0;
-        }
+    }
+
+    hasHitFloor(canvasHeight: number) {
+        return this.y + this.radius >= canvasHeight;
     }
 
     up() {

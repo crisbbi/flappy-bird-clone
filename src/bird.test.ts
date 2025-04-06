@@ -11,17 +11,6 @@ test("If the bird hits the floor, its y position should be set to the height of 
     expect(bird.velocity).toBe(0);
 });
 
-test("If the bird hits the ceiling, its y position should be set to the ceiling of the canvas + 10 and its velocity should be reset", () => {
-    const yPosition = -10;
-    const bird = new Bird(undefined, 50, yPosition);
-    const simulatedCanvasHeight = 50;
-
-    bird.stopIfOutOfBounds(simulatedCanvasHeight);
-
-    expect(bird.y).toBe(10);
-    expect(bird.velocity).toBe(0);
-});
-
 test("The bird should get negative velocity when it's pushed up, such that it moves upwards", () => {
     const yPosition = 50;
     const bird = new Bird(undefined, 50, yPosition);
@@ -30,4 +19,20 @@ test("The bird should get negative velocity when it's pushed up, such that it mo
     bird.up();
 
     expect(bird.velocity).toBeLessThan(oldVelocity);
+});
+
+test("When the bird falls down on the floor, it should return true", () => {
+    const yPosition = 50;
+    const bird = new Bird(undefined, 50, yPosition);
+    const simulatedCanvasHeight = 60;
+    const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
+    expect(isFloorHit).toBe(true);
+});
+
+test("When the bird does not hit the floor, it should return false", () => {
+    const yPosition = 50;
+    const bird = new Bird(undefined, 50, yPosition);
+    const simulatedCanvasHeight = 70;
+    const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
+    expect(isFloorHit).toBe(false);
 });
