@@ -10,13 +10,14 @@ export default class Pipe {
     p5Sketch?: p5;
     speed = 2;
     highlight = false;
+    upperLowerPipeGap = 95;
 
     constructor(p5Sketch: p5 | undefined = undefined) {
         this.p5Sketch = p5Sketch;
         this.x = p5Sketch?.width ?? Number.MAX_SAFE_INTEGER;
         this.canvasHeight = p5Sketch?.height ?? 0;
         this.topPipeHeight = this.p5Sketch?.random(this.p5Sketch.height * 0.8) ?? 0;
-        this.bottomPipeHeight = this.canvasHeight - this.topPipeHeight - 95;
+        this.bottomPipeHeight = this.canvasHeight - this.topPipeHeight - this.upperLowerPipeGap;
     }
 
     show() {
@@ -24,9 +25,9 @@ export default class Pipe {
         if (this.highlight) {
             this.p5Sketch?.fill("red");
         }
-        this.p5Sketch?.rect(this.x, 0, this.width, this.topPipeHeight);
-        const pipeStartHeight = this.canvasHeight - this.bottomPipeHeight;
-        this.p5Sketch?.rect(this.x, pipeStartHeight, this.width, this.bottomPipeHeight);
+        this.p5Sketch?.rect(this.x, -this.canvasHeight / 2, this.width, this.topPipeHeight);
+        const bottomPipeStartHeight = this.canvasHeight - this.bottomPipeHeight - this.canvasHeight / 2;
+        this.p5Sketch?.rect(this.x, bottomPipeStartHeight, this.width, this.bottomPipeHeight);
     }
 
     updatePipePosition() {

@@ -8,6 +8,8 @@ export default class Bird {
     p5Sketch?: p5;
     radius = 10;
     birdImage?: p5.Image;
+    birdImageWidth = 60;
+    birdImageHeight = 40;
 
     constructor(p5Sketch: p5 | undefined = undefined, x: number, y: number) {
         this.x = x;
@@ -16,8 +18,9 @@ export default class Bird {
     }
 
     show() {
-        this.p5Sketch?.fill(255);
-        this.p5Sketch?.ellipse(this.x, this.y, 20, 20);
+        if (this.birdImage) {
+            this.p5Sketch?.image(this.birdImage, this.x, this.y, 60, 40);
+        }
     }
 
     updatePosition(canvasHeight: number) {

@@ -3,10 +3,10 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 const a = new p5((sketch: p5) => {
-    let x = 75;
-    let y = 100;
     const canvasHeight = 400;
     const canvasWidth = 400;
+    let x = -0.25 * canvasWidth;
+    let y = -75;
     let bird = new Bird(sketch, x, y);
     let pipes: Pipe[] = [];
     let img: p5.Image;
@@ -20,13 +20,14 @@ const a = new p5((sketch: p5) => {
     };
 
     sketch.setup = () => {
-        sketch.createCanvas(canvasWidth, canvasHeight);
+        sketch.createCanvas(canvasWidth, canvasHeight, sketch.WEBGL);
+        sketch.angleMode(sketch.DEGREES);
+        sketch.imageMode(sketch.CENTER);
         bird.birdImage = img;
     };
 
     sketch.draw = () => {
         sketch.background(50);
-        sketch.image(img, x, y, 60, 40);
         sketch.fill(255);
         bird.show();
         bird.updatePosition(canvasHeight);
