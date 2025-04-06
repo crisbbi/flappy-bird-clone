@@ -35,6 +35,7 @@ const a = new p5((sketch: p5) => {
             sketch.noLoop();
             setTimeout(() => {
                 bird = new Bird(sketch, x, y);
+                bird.birdImage = img;
                 pipes = [];
                 sketch.loop();
             }, 1000);
