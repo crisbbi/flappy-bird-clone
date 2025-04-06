@@ -30,6 +30,14 @@ const a = new p5((sketch: p5) => {
         sketch.fill(255);
         bird.show();
         bird.updatePosition(canvasHeight);
+        if (bird.hasHitFloor(canvasHeight)) {
+            sketch.noLoop();
+            setTimeout(() => {
+                bird = new Bird(sketch, x, y);
+                pipes = [];
+                sketch.loop();
+            }, 1000);
+        }
 
         if (sketch.frameCount % 100 === 0) {
             pipes.push(new Pipe(sketch));
