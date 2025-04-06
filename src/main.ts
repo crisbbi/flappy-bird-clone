@@ -48,7 +48,7 @@ const a = new p5((sketch: p5) => {
             pipes[index].updatePipePosition();
             pipes[index].highlightCollisionOnNextRender(bird);
 
-            if (pipes[index].x + pipes[index].width < -10) {
+            if (pipes[index].x + pipes[index].width < -(canvasWidth / 2) - 10) {
                 pipes.splice(index, 1);
             }
         }
