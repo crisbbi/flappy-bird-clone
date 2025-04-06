@@ -38,7 +38,7 @@ export default class Bird {
     }
 
     hasHitFloor(canvasHeight: number) {
-        return this.y + this.birdImageHeight / 2 >= canvasHeight / 2;
+        return this.y + this.birdImageHeight / 2 >= canvasHeight;
     }
 
     up() {

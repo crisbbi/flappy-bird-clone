@@ -34,6 +34,7 @@ test("When the bird does not hit the floor, it should return false", () => {
     const yPosition = 50;
     const bird = new Bird(undefined, 50, yPosition);
     bird.birdImageHeight = 40;
+    // canvas height needs to account for the coordinate system in webgl mode, which starts in the middle of the canvas and not in the top left corner.
     const simulatedCanvasHeight = 80;
     const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
     expect(isFloorHit).toBe(false);

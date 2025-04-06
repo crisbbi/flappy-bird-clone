@@ -31,7 +31,8 @@ const a = new p5((sketch: p5) => {
         sketch.fill(255);
         bird.show();
         bird.updatePosition(canvasHeight);
-        if (bird.hasHitFloor(canvasHeight)) {
+        const canvasHeightInWebglMode = canvasHeight / 2;
+        if (bird.hasHitFloor(canvasHeightInWebglMode)) {
             sketch.noLoop();
             setTimeout(() => {
                 bird = new Bird(sketch, x, y);
