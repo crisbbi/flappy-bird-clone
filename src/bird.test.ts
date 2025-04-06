@@ -24,7 +24,8 @@ test("The bird should get negative velocity when it's pushed up, such that it mo
 test("When the bird falls down on the floor, it should return true", () => {
     const yPosition = 50;
     const bird = new Bird(undefined, 50, yPosition);
-    const simulatedCanvasHeight = 60;
+    const simulatedCanvasHeight = 70;
+    bird.birdImageHeight = 40;
     const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
     expect(isFloorHit).toBe(true);
 });
@@ -32,7 +33,8 @@ test("When the bird falls down on the floor, it should return true", () => {
 test("When the bird does not hit the floor, it should return false", () => {
     const yPosition = 50;
     const bird = new Bird(undefined, 50, yPosition);
-    const simulatedCanvasHeight = 70;
+    bird.birdImageHeight = 40;
+    const simulatedCanvasHeight = 80;
     const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
     expect(isFloorHit).toBe(false);
 });
