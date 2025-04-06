@@ -10,7 +10,7 @@ export default class Pipe {
     p5Sketch?: p5;
     speed = 2;
     highlight = false;
-    upperLowerPipeGap = 95;
+    upperLowerPipeGap = 120;
 
     constructor(p5Sketch: p5 | undefined = undefined) {
         this.p5Sketch = p5Sketch;
