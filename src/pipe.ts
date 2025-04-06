@@ -35,9 +35,11 @@ export default class Pipe {
     }
 
     highlightCollisionOnNextRender(bird: Bird) {
-        const birdIsTooHigh = bird.y - bird.radius <= this.topPipeHeight;
-        const birdIsTooLow = bird.y + bird.radius >= this.canvasHeight - this.bottomPipeHeight;
-        const birdIsBetweenPipes = bird.x + bird.radius >= this.x && bird.x + bird.radius <= this.x + this.width;
+        const birdIsTooHigh = bird.y - bird.birdImageHeight / 2 + this.canvasHeight / 2 <= this.topPipeHeight;
+        const birdIsTooLow =
+            bird.y + bird.birdImageHeight / 2 + this.canvasHeight / 2 >= this.canvasHeight - this.bottomPipeHeight;
+        const birdIsBetweenPipes =
+            bird.x + bird.birdImageWidth / 2 >= this.x && bird.x - bird.birdImageWidth / 2 <= this.x + this.width;
         if (birdIsBetweenPipes && (birdIsTooHigh || birdIsTooLow)) {
             this.highlight = true;
             return;
