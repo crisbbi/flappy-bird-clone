@@ -7,6 +7,7 @@ export default class Bird {
     velocity = 0;
     p5Sketch?: p5;
     radius = 10;
+    birdImage?: p5.Image;
 
     constructor(p5Sketch: p5 | undefined = undefined, x: number, y: number) {
         this.x = x;

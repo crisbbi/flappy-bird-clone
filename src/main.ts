@@ -3,19 +3,30 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 const a = new p5((sketch: p5) => {
-    let x = 100;
+    let x = 75;
     let y = 100;
     const canvasHeight = 400;
     const canvasWidth = 400;
     let bird = new Bird(sketch, x, y);
     let pipes: Pipe[] = [];
+    let img: p5.Image;
+
+    sketch.preload = () => {
+        img = sketch.loadImage(
+            "./src/bird.png",
+            success => console.log(success),
+            err => console.error(err)
+        );
+    };
 
     sketch.setup = () => {
         sketch.createCanvas(canvasWidth, canvasHeight);
+        bird.birdImage = img;
     };
 
     sketch.draw = () => {
-        sketch.background(0);
+        sketch.background(50);
+        sketch.image(img, x, y, 60, 40);
         sketch.fill(255);
         bird.show();
         bird.updatePosition(canvasHeight);
