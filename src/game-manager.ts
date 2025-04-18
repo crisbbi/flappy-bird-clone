@@ -33,6 +33,12 @@ export class Game {
 
     show() {
         this.bird.show();
+        for (let index = this.pipes.length - 1; index >= 0; index--) {
+            this.pipes[index].show();
+        }
+    }
+
+    update() {
         this.bird.updatePosition(this.canvasHeight);
         const canvasHeightInWebglMode = this.canvasHeight / 2;
         const pipe = this.findNearestPipeToBird();
@@ -49,7 +55,6 @@ export class Game {
             this.pipes.push(new Pipe(this.p5Sketch));
         }
         for (let index = this.pipes.length - 1; index >= 0; index--) {
-            this.pipes[index].show();
             this.pipes[index].updatePipePosition();
 
             if (this.pipes[index].x + this.pipes[index].width < -(this.canvasWidth / 2) - 10) {
