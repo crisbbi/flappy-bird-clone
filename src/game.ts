@@ -3,6 +3,11 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 export class Game {
+    reset() {
+        this.bird.resetPosition();
+        this.pipes = [];
+        this.p5Sketch?.loop();
+    }
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
@@ -29,9 +34,7 @@ export class Game {
         if (this.bird.hasHitFloor(canvasHeightInWebglMode)) {
             this.p5Sketch?.noLoop();
             setTimeout(() => {
-                this.bird.resetPosition();
-                this.pipes = [];
-                this.p5Sketch?.loop();
+                this.reset();
             }, 1000);
         }
 
