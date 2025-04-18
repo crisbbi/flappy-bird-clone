@@ -28,9 +28,7 @@ export class Game {
         const canvasHeightInWebglMode = this.canvasHeight / 2;
         if (this.bird.hasHitFloor(canvasHeightInWebglMode)) {
             this.p5Sketch?.noLoop();
-            setTimeout(() => {
-                this.reset();
-            }, 1000);
+            setTimeout(() => this.reset(), 1000);
         }
 
         const frameCount = this.p5Sketch?.frameCount ?? 0;
