@@ -51,7 +51,6 @@ export class Game {
         for (let index = this.pipes.length - 1; index >= 0; index--) {
             this.pipes[index].show();
             this.pipes[index].updatePipePosition();
-            this.pipes[index].highlightCollisionOnNextRender(this.bird);
 
             if (this.pipes[index].x + this.pipes[index].width < -(this.canvasWidth / 2) - 10) {
                 this.pipes.splice(index, 1);

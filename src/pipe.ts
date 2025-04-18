@@ -34,10 +34,6 @@ export default class Pipe {
         this.x -= this.speed;
     }
 
-    highlightCollisionOnNextRender(bird: Bird) {
-        this.highlight = this.hasCollidedWithBird(bird);
-    }
-
     hasCollidedWithBird(bird: Bird) {
         const birdIsTooHigh = bird.y - bird.birdImageHeight / 2 + this.canvasHeight / 2 <= this.topPipeHeight;
         const birdIsTooLow =

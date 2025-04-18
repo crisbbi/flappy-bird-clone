@@ -25,18 +25,18 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 100;
         const bird = new Bird(undefined, 10, 50);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(false);
+        expect(hasCollided).toBe(false);
     });
 
     it("If the bird collides with the left side of the upper pipe, the pipe should be marked to be highlighted on the next render", () => {
         pipe.topPipeHeight = 250;
         const bird = new Bird(undefined, 45, 200);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(true);
+        expect(hasCollided).toBe(true);
     });
 
     it("If the bird collides with the left side of the lower pipe, the pipe should be marked to be highlighted on the next render", () => {
@@ -44,18 +44,18 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 300;
         const bird = new Bird(undefined, 45, 200);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(true);
+        expect(hasCollided).toBe(true);
     });
 
     it("If the bird collides with the bottom side of the upper pipe, the pipe should be marked to be highlighted on the next render", () => {
         pipe.topPipeHeight = 240;
         const bird = new Bird(undefined, 55, 60);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(true);
+        expect(hasCollided).toBe(true);
     });
 
     it("If the bird collides with the upper side of the lower pipe, the pipe should be marked to be highlighted on the next render", () => {
@@ -63,9 +63,9 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 100;
         const bird = new Bird(undefined, 55, 40);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(true);
+        expect(hasCollided).toBe(true);
     });
 
     it("If the bird is between the upper and lower pipe, the pipe should not be marked to be highlighted on the next render", () => {
@@ -73,18 +73,18 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.bottomPipeHeight = 20;
         const bird = new Bird(undefined, 55, 50);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(false);
+        expect(hasCollided).toBe(false);
     });
 
     it("If the bird is to the right of the pipe without touching it, the pipe should not be marked to be highlighted on the next render", () => {
         const birdradius = 10;
         const bird = new Bird(undefined, pipe.x + pipe.width + birdradius + 1, 50);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(false);
+        expect(hasCollided).toBe(false);
     });
 
     it("If the bird collides with a pipe, the pipes should be highlighted", () => {
@@ -93,8 +93,8 @@ describe("Collision detection between the pipe and the bird", () => {
         pipe.canvasHeight = 100;
         const bird = new Bird(undefined, 50, 0);
 
-        pipe.highlightCollisionOnNextRender(bird);
+        const hasCollided = pipe.hasCollidedWithBird(bird);
 
-        expect(pipe.highlight).toBe(true);
+        expect(hasCollided).toBe(true);
     });
 });
