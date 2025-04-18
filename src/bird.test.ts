@@ -1,5 +1,6 @@
 import { it, expect, describe } from "vitest";
 import Bird from "./bird";
+import Pipe from "./pipe";
 
 describe("Bird", () => {
     it("If the bird hits the floor, its y position should be set to the height of the canvas minus 10 and its velocity should be reset", () => {
@@ -53,5 +54,27 @@ describe("Bird", () => {
         expect(bird.y).toBe(bird.startPositionY);
         expect(bird.x).toBe(bird.startPositionX);
         expect(bird.velocity).toBe(0);
+    });
+
+    it("If the bird is to the left of the right side of the nearest pipe, it should not have fully passed the nearest pipe yet", () => {
+        const yPosition = 50;
+        const xPosition = 20;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        const nearestPipe = new Pipe(undefined, 60);
+
+        const birdHasPassedPipe = bird.checkBirdHasPassedNearestPipe(nearestPipe);
+
+        expect(birdHasPassedPipe).toBe(false);
+    });
+
+    it("If the bird is to the right of the right side of the nearest pipe, it should have fully passed the nearest pipe", () => {
+        const yPosition = 50;
+        const xPosition = 80;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        const nearestPipe = new Pipe(undefined, 10);
+
+        const birdHasPassedPipe = bird.checkBirdHasPassedNearestPipe(nearestPipe);
+
+        expect(birdHasPassedPipe).toBe(true);
     });
 });

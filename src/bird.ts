@@ -1,4 +1,5 @@
 import p5 from "p5";
+import Pipe from "./pipe";
 
 export default class Bird {
     x: number;
@@ -53,5 +54,9 @@ export default class Bird {
         this.x = this.startPositionX;
         this.y = this.startPositionY;
         this.velocity = 0;
+    }
+
+    checkBirdHasPassedNearestPipe(nearestPipe: Pipe) {
+        return this.x - this.radius > nearestPipe.x + nearestPipe.width;
     }
 }
