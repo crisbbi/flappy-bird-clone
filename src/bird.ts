@@ -3,6 +3,8 @@ import p5 from "p5";
 export default class Bird {
     x: number;
     y: number;
+    startPositionX: number;
+    startPositionY: number;
     gravity = 0.25;
     velocity = 0;
     p5Sketch?: p5;
@@ -13,7 +15,9 @@ export default class Bird {
 
     constructor(p5Sketch: p5 | undefined = undefined, x: number, y: number) {
         this.x = x;
+        this.startPositionX = x;
         this.y = y;
+        this.startPositionY = y;
         this.p5Sketch = p5Sketch;
     }
 
@@ -43,5 +47,11 @@ export default class Bird {
 
     up() {
         this.velocity = -6;
+    }
+
+    resetPosition() {
+        this.x = this.startPositionX;
+        this.y = this.startPositionY;
+        this.velocity = 0;
     }
 }

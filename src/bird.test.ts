@@ -1,41 +1,57 @@
-import { test, expect } from "vitest";
+import { it, expect, describe } from "vitest";
 import Bird from "./bird";
 
-test("If the bird hits the floor, its y position should be set to the height of the canvas minus 10 and its velocity should be reset", () => {
-    const bird = new Bird(undefined, 50, 50);
-    const simulatedCanvasHeight = 50;
+describe("Bird", () => {
+    it("If the bird hits the floor, its y position should be set to the height of the canvas minus 10 and its velocity should be reset", () => {
+        const bird = new Bird(undefined, 50, 50);
+        const simulatedCanvasHeight = 50;
 
-    bird.stopIfOutOfBounds(simulatedCanvasHeight);
+        bird.stopIfOutOfBounds(simulatedCanvasHeight);
 
-    expect(bird.y).toBe(simulatedCanvasHeight - 10);
-    expect(bird.velocity).toBe(0);
-});
+        expect(bird.y).toBe(simulatedCanvasHeight - 10);
+        expect(bird.velocity).toBe(0);
+    });
 
-test("The bird should get negative velocity when it's pushed up, such that it moves upwards", () => {
-    const yPosition = 50;
-    const bird = new Bird(undefined, 50, yPosition);
-    const oldVelocity = bird.velocity;
+    it("The bird should get negative velocity when it's pushed up, such that it moves upwards", () => {
+        const yPosition = 50;
+        const bird = new Bird(undefined, 50, yPosition);
+        const oldVelocity = bird.velocity;
 
-    bird.up();
+        bird.up();
 
-    expect(bird.velocity).toBeLessThan(oldVelocity);
-});
+        expect(bird.velocity).toBeLessThan(oldVelocity);
+    });
 
-test("When the bird falls down on the floor, it should return true", () => {
-    const yPosition = 50;
-    const bird = new Bird(undefined, 50, yPosition);
-    const simulatedCanvasHeight = 70;
-    bird.birdImageHeight = 40;
-    const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
-    expect(isFloorHit).toBe(true);
-});
+    it("When the bird falls down on the floor, it should return true", () => {
+        const yPosition = 50;
+        const bird = new Bird(undefined, 50, yPosition);
+        const simulatedCanvasHeight = 70;
+        bird.birdImageHeight = 40;
+        const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
+        expect(isFloorHit).toBe(true);
+    });
 
-test("When the bird does not hit the floor, it should return false", () => {
-    const yPosition = 50;
-    const bird = new Bird(undefined, 50, yPosition);
-    bird.birdImageHeight = 40;
-    // canvas height needs to account for the coordinate system in webgl mode, which starts in the middle of the canvas and not in the top left corner.
-    const simulatedCanvasHeight = 80;
-    const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
-    expect(isFloorHit).toBe(false);
+    it("When the bird does not hit the floor, it should return false", () => {
+        const yPosition = 50;
+        const bird = new Bird(undefined, 50, yPosition);
+        bird.birdImageHeight = 40;
+        // canvas height needs to account for the coordinate system in webgl mode, which starts in the middle of the canvas and not in the top left corner.
+        const simulatedCanvasHeight = 80;
+        const isFloorHit = bird.hasHitFloor(simulatedCanvasHeight);
+        expect(isFloorHit).toBe(false);
+    });
+
+    it("When the bird is reset, it should be placed at the initial position", () => {
+        const yPosition = 50;
+        const xPosition = 50;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        bird.startPositionX = 400;
+        bird.startPositionY = 400;
+
+        bird.resetPosition();
+
+        expect(bird.y).toBe(bird.startPositionY);
+        expect(bird.x).toBe(bird.startPositionX);
+        expect(bird.velocity).toBe(0);
+    });
 });
