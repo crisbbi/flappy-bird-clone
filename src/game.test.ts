@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Game } from "./game";
+import { Game } from "./game-manager";
 import Bird from "./bird";
 import Pipe from "./pipe";
 

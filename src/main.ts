@@ -1,7 +1,7 @@
 import p5 from "p5";
 import Bird from "./bird";
 import Pipe from "./pipe";
-import { Game } from "./game";
+import { Game } from "./game-manager";
 
 const a = new p5((sketch: p5) => {
     const canvasHeight = 400;
