@@ -3,11 +3,6 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 export class Game {
-    reset() {
-        this.bird.resetPosition();
-        this.pipes = [];
-        this.p5Sketch?.loop();
-    }
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
@@ -51,5 +46,11 @@ export class Game {
                 this.pipes.splice(index, 1);
             }
         }
+    }
+
+    reset() {
+        this.bird.resetPosition();
+        this.pipes = [];
+        this.p5Sketch?.loop();
     }
 }
