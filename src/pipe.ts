@@ -12,9 +12,9 @@ export default class Pipe {
     highlight = false;
     upperLowerPipeGap = 120;
 
-    constructor(p5Sketch: p5 | undefined = undefined) {
+    constructor(p5Sketch: p5 | undefined = undefined, x: number = Number.MAX_SAFE_INTEGER) {
         this.p5Sketch = p5Sketch;
-        this.x = p5Sketch?.width ?? Number.MAX_SAFE_INTEGER;
+        this.x = p5Sketch?.width ?? x;
         this.canvasHeight = p5Sketch?.height ?? 0;
         this.topPipeHeight = this.p5Sketch?.random(this.p5Sketch.height * 0.8) ?? 0;
         this.bottomPipeHeight = this.canvasHeight - this.topPipeHeight - this.upperLowerPipeGap;

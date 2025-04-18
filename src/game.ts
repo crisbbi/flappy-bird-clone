@@ -3,6 +3,29 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 export class Game {
+    findNearestPipeToBird() {
+        if (this.pipes.length === 0) {
+            return undefined;
+        }
+        return this.pipes.reduce<Pipe>((currentlyNearest, currentPipe) => {
+            const distanceToCurrentlyNearestPipeLeftSide = this.distanceBirdToCoordinate(currentlyNearest.x);
+            const distanceToCurrentlyNearestPipeRightSide = this.distanceBirdToCoordinate(
+                currentlyNearest.x + currentlyNearest.width
+            );
+            const distanceToCurrentPipeLeftSide = this.distanceBirdToCoordinate(currentPipe.x);
+            const distanceToCurrentPipeRightSide = this.distanceBirdToCoordinate(currentPipe.x + currentPipe.width);
+            const nearestDistance = Math.min(
+                distanceToCurrentlyNearestPipeLeftSide,
+                distanceToCurrentlyNearestPipeRightSide,
+                distanceToCurrentPipeLeftSide,
+                distanceToCurrentPipeRightSide
+            );
+            return nearestDistance === distanceToCurrentlyNearestPipeLeftSide ||
+                nearestDistance === distanceToCurrentlyNearestPipeRightSide
+                ? currentlyNearest
+                : currentPipe;
+        }, this.pipes[0]);
+    }
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
@@ -16,6 +39,15 @@ export class Game {
         this.pipes = pipes;
         this.canvasHeight = sketch?.height ?? 400;
         this.canvasWidth = sketch?.width ?? 400;
+    }
+
+    distanceBirdToCoordinate(pipeCoordinateX: number) {
+        const currentCoordinateX = Math.abs(pipeCoordinateX);
+        const birdX = Math.abs(this.bird.x);
+        const furthestPointBetweenCoordinateAndBird = Math.max(currentCoordinateX, birdX);
+        const nearestPointBetweenCoordinateAndBird = Math.min(currentCoordinateX, birdX);
+        const disanceCoordinateToBird = furthestPointBetweenCoordinateAndBird - nearestPointBetweenCoordinateAndBird;
+        return disanceCoordinateToBird;
     }
 
     moveBirdUp() {
