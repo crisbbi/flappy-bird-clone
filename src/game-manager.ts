@@ -35,8 +35,12 @@ export class Game {
         this.bird.show();
         this.bird.updatePosition(this.canvasHeight);
         const canvasHeightInWebglMode = this.canvasHeight / 2;
-        if (this.bird.hasHitFloor(canvasHeightInWebglMode)) {
+        const pipe = this.findNearestPipeToBird();
+        if (this.bird.hasHitFloor(canvasHeightInWebglMode) || (pipe && pipe.hasCollidedWithBird(this.bird))) {
             this.p5Sketch?.noLoop();
+            if (pipe && pipe.hasCollidedWithBird(this.bird)) {
+                pipe.highlight = true;
+            }
             setTimeout(() => this.reset(), 1000);
         }
 
