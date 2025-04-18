@@ -63,4 +63,46 @@ describe("Game", () => {
         const nearestPipe = game.findNearestPipeToBird();
         expect(nearestPipe).toBe(pipes[0]);
     });
+
+    it("Update the score and set it to non-updateable when the bird has passed through a pipe and the score can be updated", () => {
+        const bird = new Bird(undefined, 100, 200);
+        game.bird = bird;
+        game.scoreState = {
+            canUpdateScore: true,
+            score: 0,
+        };
+        const pipe = new Pipe(undefined, 30);
+
+        game.updateScore(pipe);
+
+        expect(game.scoreState).toEqual({ canUpdateScore: false, score: 1 });
+    });
+
+    it("Do not update the score and keep it to non-updateable when the bird has passed through a pipe and the score should not be increased again", () => {
+        const bird = new Bird(undefined, 100, 200);
+        game.bird = bird;
+        game.scoreState = {
+            canUpdateScore: false,
+            score: 1,
+        };
+        const pipe = new Pipe(undefined, 30);
+
+        game.updateScore(pipe);
+
+        expect(game.scoreState).toEqual({ canUpdateScore: false, score: 1 });
+    });
+
+    it("Do not update the score but make it updateable again when the bird has not passed through a pipe yet and the score is set to non-updateable", () => {
+        const bird = new Bird(undefined, 100, 200);
+        game.bird = bird;
+        game.scoreState = {
+            canUpdateScore: false,
+            score: 1,
+        };
+        const pipe = new Pipe(undefined, 120);
+
+        game.updateScore(pipe);
+
+        expect(game.scoreState).toEqual({ canUpdateScore: true, score: 1 });
+    });
 });

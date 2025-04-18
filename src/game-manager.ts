@@ -3,12 +3,32 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 export class Game {
+    updateScore(nearestPipe: Pipe) {
+        if (this.bird.checkBirdHasPassedNearestPipe(nearestPipe) && this.scoreState.canUpdateScore) {
+            this.scoreState = {
+                canUpdateScore: false,
+                score: this.scoreState.score + 1,
+            };
+        } else if (!this.bird.checkBirdHasPassedNearestPipe(nearestPipe) && !this.scoreState.canUpdateScore) {
+            this.scoreState = {
+                ...this.scoreState,
+                canUpdateScore: true,
+            };
+        }
+    }
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
     score = 0;
     canvasHeight = 400;
     canvasWidth = 400;
+    scoreState: {
+        canUpdateScore: boolean;
+        score: number;
+    } = {
+        canUpdateScore: false,
+        score: 0,
+    };
 
     constructor(sketch: p5 | undefined, bird: Bird, pipes: Pipe[]) {
         this.p5Sketch = sketch;
@@ -42,6 +62,9 @@ export class Game {
         this.bird.updatePosition(this.canvasHeight);
         const canvasHeightInWebglMode = this.canvasHeight / 2;
         const pipe = this.findNearestPipeToBird();
+        if (pipe) {
+            this.updateScore(pipe);
+        }
         if (this.bird.hasHitFloor(canvasHeightInWebglMode) || (pipe && pipe.hasCollidedWithBird(this.bird))) {
             this.p5Sketch?.noLoop();
             if (pipe && pipe.hasCollidedWithBird(this.bird)) {
