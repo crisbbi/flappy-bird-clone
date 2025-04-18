@@ -3,29 +3,6 @@ import Bird from "./bird";
 import Pipe from "./pipe";
 
 export class Game {
-    findNearestPipeToBird() {
-        if (this.pipes.length === 0) {
-            return undefined;
-        }
-        return this.pipes.reduce<Pipe>((currentlyNearest, currentPipe) => {
-            const distanceToCurrentlyNearestPipeLeftSide = this.distanceBirdToCoordinate(currentlyNearest.x);
-            const distanceToCurrentlyNearestPipeRightSide = this.distanceBirdToCoordinate(
-                currentlyNearest.x + currentlyNearest.width
-            );
-            const distanceToCurrentPipeLeftSide = this.distanceBirdToCoordinate(currentPipe.x);
-            const distanceToCurrentPipeRightSide = this.distanceBirdToCoordinate(currentPipe.x + currentPipe.width);
-            const nearestDistance = Math.min(
-                distanceToCurrentlyNearestPipeLeftSide,
-                distanceToCurrentlyNearestPipeRightSide,
-                distanceToCurrentPipeLeftSide,
-                distanceToCurrentPipeRightSide
-            );
-            return nearestDistance === distanceToCurrentlyNearestPipeLeftSide ||
-                nearestDistance === distanceToCurrentlyNearestPipeRightSide
-                ? currentlyNearest
-                : currentPipe;
-        }, this.pipes[0]);
-    }
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
@@ -76,6 +53,30 @@ export class Game {
                 this.pipes.splice(index, 1);
             }
         }
+    }
+
+    findNearestPipeToBird() {
+        if (this.pipes.length === 0) {
+            return undefined;
+        }
+        return this.pipes.reduce<Pipe>((currentlyNearest, currentPipe) => {
+            const distanceToCurrentlyNearestPipeLeftSide = this.distanceBirdToCoordinate(currentlyNearest.x);
+            const distanceToCurrentlyNearestPipeRightSide = this.distanceBirdToCoordinate(
+                currentlyNearest.x + currentlyNearest.width
+            );
+            const distanceToCurrentPipeLeftSide = this.distanceBirdToCoordinate(currentPipe.x);
+            const distanceToCurrentPipeRightSide = this.distanceBirdToCoordinate(currentPipe.x + currentPipe.width);
+            const nearestDistance = Math.min(
+                distanceToCurrentlyNearestPipeLeftSide,
+                distanceToCurrentlyNearestPipeRightSide,
+                distanceToCurrentPipeLeftSide,
+                distanceToCurrentPipeRightSide
+            );
+            return nearestDistance === distanceToCurrentlyNearestPipeLeftSide ||
+                nearestDistance === distanceToCurrentlyNearestPipeRightSide
+                ? currentlyNearest
+                : currentPipe;
+        }, this.pipes[0]);
     }
 
     reset() {
