@@ -33,7 +33,7 @@ export class Game {
 
         const frameCount = this.p5Sketch?.frameCount ?? 0;
         if (frameCount % 100 === 0) {
-            this.pipes?.push(new Pipe(this.p5Sketch));
+            this.pipes.push(new Pipe(this.p5Sketch));
         }
         for (let index = this.pipes.length - 1; index >= 0; index--) {
             this.pipes[index].show();
