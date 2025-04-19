@@ -105,4 +105,15 @@ describe("Game", () => {
 
         expect(game.scoreState).toEqual({ canUpdateScore: true, score: 1 });
     });
+
+    it("If the game is reset, the score is set to 0 and updateable", () => {
+        game.scoreState = {
+            score: 5,
+            canUpdateScore: false,
+        };
+
+        game.reset();
+
+        expect(game.scoreState).toEqual({ score: 0, canUpdateScore: true });
+    });
 });

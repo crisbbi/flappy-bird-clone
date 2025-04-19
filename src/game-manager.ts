@@ -114,6 +114,10 @@ export class Game {
     reset() {
         this.bird.resetPosition();
         this.pipes = [];
+        this.scoreState = {
+            score: 0,
+            canUpdateScore: true,
+        };
         this.p5Sketch?.loop();
     }
 }
