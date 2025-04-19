@@ -51,7 +51,7 @@ export class Game {
         this.bird.up();
     }
 
-    show() {
+    render() {
         this.p5Sketch?.text(this.scoreState.score, this.canvasWidth / 2 - 40, -this.canvasHeight / 2 + 40);
         this.bird.show();
         for (let index = this.pipes.length - 1; index >= 0; index--) {
