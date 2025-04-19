@@ -52,6 +52,7 @@ export class Game {
     }
 
     show() {
+        this.p5Sketch?.text(this.scoreState.score, this.canvasWidth / 2 - 40, -this.canvasHeight / 2 + 40);
         this.bird.show();
         for (let index = this.pipes.length - 1; index >= 0; index--) {
             this.pipes[index].show();

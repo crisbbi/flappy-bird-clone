@@ -11,11 +11,17 @@ const a = new p5((sketch: p5) => {
     let bird = new Bird(sketch, x, y);
     let pipes: Pipe[] = [];
     let img: p5.Image;
+    let font: p5.Font;
     let game: Game;
 
     sketch.preload = () => {
         img = sketch.loadImage(
-            "./src/bird.png",
+            "./src/assets/bird.png",
+            success => console.log(success),
+            err => console.error(err)
+        );
+        font = sketch.loadFont(
+            "src/assets/Inconsolata.otf",
             success => console.log(success),
             err => console.error(err)
         );
@@ -23,6 +29,8 @@ const a = new p5((sketch: p5) => {
 
     sketch.setup = () => {
         sketch.createCanvas(canvasWidth, canvasHeight, sketch.WEBGL);
+        sketch.textSize(36);
+        sketch.textFont(font);
         sketch.angleMode(sketch.DEGREES);
         sketch.imageMode(sketch.CENTER);
         bird.birdImage = img;
@@ -30,8 +38,8 @@ const a = new p5((sketch: p5) => {
     };
 
     sketch.draw = () => {
-        sketch.background(50);
         sketch.fill(255);
+        sketch.background(50);
         game.update();
         game.show();
     };
