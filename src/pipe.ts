@@ -21,7 +21,9 @@ export default class Pipe {
     }
 
     show() {
-        this.p5Sketch?.fill(255);
+        this.p5Sketch?.fill("#648e2e");
+        this.p5Sketch?.stroke("black");
+        this.p5Sketch?.strokeWeight(6);
         if (this.highlight) {
             this.p5Sketch?.fill("red");
         }
