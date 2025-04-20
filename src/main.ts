@@ -10,13 +10,15 @@ const a = new p5((sketch: p5) => {
     let y = -75;
     let bird = new Bird(sketch, x, y);
     let pipes: Pipe[] = [];
-    let img: p5.Image;
+    let birdImg: p5.Image;
+    let background: p5.Image;
     let font: p5.Font;
     let game: Game;
 
     sketch.preload = () => {
-        img = sketch.loadImage(
-            "./src/assets/bird.png",
+        birdImg = sketch.loadImage("./src/assets/bird.png");
+        background = sketch.loadImage(
+            "./src/assets/background.jpg",
             success => console.log(success),
             err => console.error(err)
         );
@@ -33,8 +35,8 @@ const a = new p5((sketch: p5) => {
         sketch.textFont(font);
         sketch.angleMode(sketch.DEGREES);
         sketch.imageMode(sketch.CENTER);
-        bird.birdImage = img;
-        game = new Game(sketch, bird, pipes);
+        bird.birdImage = birdImg;
+        game = new Game(sketch, background, bird, pipes);
     };
 
     sketch.draw = () => {

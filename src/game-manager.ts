@@ -19,7 +19,9 @@ export class Game {
     p5Sketch?: p5;
     bird: Bird;
     pipes: Pipe[] = [];
+    backgroundImage?: p5.Image;
     score = 0;
+    backgroundImageX = 0;
     canvasHeight = 400;
     canvasWidth = 400;
     scoreState: {
@@ -30,9 +32,12 @@ export class Game {
         score: 0,
     };
 
-    constructor(sketch: p5 | undefined, bird: Bird, pipes: Pipe[]) {
+    constructor(sketch: p5 | undefined, backgroundImage: p5.Image | undefined, bird: Bird, pipes: Pipe[]) {
         this.p5Sketch = sketch;
         this.bird = bird;
+        if (backgroundImage) {
+            this.backgroundImage = backgroundImage;
+        }
         this.pipes = pipes;
         this.canvasHeight = sketch?.height ?? 400;
         this.canvasWidth = sketch?.width ?? 400;
@@ -52,11 +57,23 @@ export class Game {
     }
 
     render() {
-        this.p5Sketch?.text(this.scoreState.score, this.canvasWidth / 2 - 40, -this.canvasHeight / 2 + 40);
+        if (this.backgroundImage) {
+            this.backgroundImageX = this.orderBackgroundImages(this.backgroundImageX);
+            this.p5Sketch?.image(this.backgroundImage, this.backgroundImageX, 0, this.canvasWidth, this.canvasHeight);
+            this.p5Sketch?.image(
+                this.backgroundImage,
+                this.backgroundImageX + this.canvasWidth,
+                0,
+                this.canvasWidth,
+                this.canvasHeight
+            );
+        }
         this.bird.show();
         for (let index = this.pipes.length - 1; index >= 0; index--) {
             this.pipes[index].show();
         }
+        this.p5Sketch?.fill(255);
+        this.p5Sketch?.text(this.scoreState.score, this.canvasWidth / 2 - 40, -this.canvasHeight / 2 + 40);
     }
 
     update() {
@@ -85,6 +102,7 @@ export class Game {
                 this.pipes.splice(index, 1);
             }
         }
+        this.backgroundImageX--;
     }
 
     findNearestPipeToBird() {
@@ -119,5 +137,11 @@ export class Game {
             canUpdateScore: true,
         };
         this.p5Sketch?.loop();
+    }
+
+    orderBackgroundImages(leftImageCoordinateX: number) {
+        leftImageCoordinateX = leftImageCoordinateX > -this.canvasWidth ? leftImageCoordinateX - 1 : 0;
+
+        return leftImageCoordinateX;
     }
 }

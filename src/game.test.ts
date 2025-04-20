@@ -7,7 +7,7 @@ describe("Game", () => {
     let game: Game;
 
     beforeEach(() => {
-        game = new Game(undefined, new Bird(undefined, 0, 0), []);
+        game = new Game(undefined, undefined, new Bird(undefined, 0, 0), []);
     });
 
     it("On game reset the pipe array should be cleared", () => {
@@ -115,5 +115,19 @@ describe("Game", () => {
         game.reset();
 
         expect(game.scoreState).toEqual({ score: 0, canUpdateScore: true });
+    });
+
+    it("If the first background image has not completely moved past the left canvas edge, the left background image decreases its x-coordinate by 1", () => {
+        const image1StartX = 0;
+        const imagesCoordinates = game.orderBackgroundImages(image1StartX);
+
+        expect(imagesCoordinates).toBe(image1StartX - 1);
+    });
+
+    it("If the first background image has completely moved past the left canvas edge, the first background image x-coordinate will be set to 0", () => {
+        const image1StartX = -game.canvasWidth;
+        const imagesCoordinates = game.orderBackgroundImages(image1StartX);
+
+        expect(imagesCoordinates).toBe(0);
     });
 });
