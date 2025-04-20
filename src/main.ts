@@ -37,7 +37,6 @@ const a = new p5((sketch: p5) => {
 
     sketch.draw = () => {
         sketch.fill(255);
-        sketch.background(50);
         game.update();
         game.render();
     };
