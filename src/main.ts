@@ -22,11 +22,7 @@ const a = new p5((sketch: p5) => {
             success => console.log(success),
             err => console.error(err)
         );
-        font = sketch.loadFont(
-            "src/assets/Inconsolata.otf",
-            success => console.log(success),
-            err => console.error(err)
-        );
+        font = sketch.loadFont("src/assets/Inconsolata.otf");
     };
 
     sketch.setup = () => {
