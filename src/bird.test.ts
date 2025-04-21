@@ -77,4 +77,42 @@ describe("Bird", () => {
 
         expect(birdHasPassedPipe).toBe(true);
     });
+
+    it("If the bird image is tilted between 0 and 45 degrees, on position update the tilt should increase by 1 degree", () => {
+        const yPosition = 50;
+        const xPosition = 20;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        bird.tiltAngleDegrees = 10;
+        const whateverCanvasHeight = 200;
+        bird.updatePosition(whateverCanvasHeight);
+        expect(bird.tiltAngleDegrees).toBe(11);
+    });
+
+    it("If the bird image is tilted 45 degrees, on position update the tilt should not increase", () => {
+        const yPosition = 50;
+        const xPosition = 20;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        bird.tiltAngleDegrees = 60;
+        const whateverCanvasHeight = 200;
+        bird.updatePosition(whateverCanvasHeight);
+        expect(bird.tiltAngleDegrees).toBe(60);
+    });
+
+    it("If the bird position is reset, the tilt angle is set to 0", () => {
+        const yPosition = 50;
+        const xPosition = 20;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        bird.tiltAngleDegrees = 45;
+        bird.resetPosition();
+        expect(bird.tiltAngleDegrees).toBe(0);
+    });
+
+    it("When the bird moves up, the tilt angle should be set to -45 degrees", () => {
+        const yPosition = 50;
+        const xPosition = 20;
+        const bird = new Bird(undefined, xPosition, yPosition);
+        bird.tiltAngleDegrees = 40;
+        bird.up();
+        expect(bird.tiltAngleDegrees).toBe(-45);
+    });
 });

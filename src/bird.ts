@@ -11,6 +11,7 @@ export default class Bird {
     p5Sketch?: p5;
     radius = 10;
     birdImage?: p5.Image;
+    tiltAngleDegrees = 0;
     birdImageWidth = 60;
     birdImageHeight = 40;
 
@@ -24,7 +25,11 @@ export default class Bird {
 
     show() {
         if (this.birdImage) {
-            this.p5Sketch?.image(this.birdImage, this.x, this.y, 60, 40);
+            this.p5Sketch?.push();
+            this.p5Sketch?.translate(this.x, this.y);
+            this.p5Sketch?.rotateZ(this.tiltAngleDegrees);
+            this.p5Sketch?.image(this.birdImage, 0, 0, 60, 40);
+            this.p5Sketch?.pop();
         }
     }
 
@@ -32,6 +37,7 @@ export default class Bird {
         this.velocity += this.gravity;
         this.velocity *= 0.97;
         this.y += this.velocity;
+        this.tiltAngleDegrees = this.tiltAngleDegrees < 60 ? this.tiltAngleDegrees + 1 : this.tiltAngleDegrees;
         this.stopIfOutOfBounds(canvasHeight);
     }
 
@@ -48,12 +54,14 @@ export default class Bird {
 
     up() {
         this.velocity = -6;
+        this.tiltAngleDegrees = -45;
     }
 
     resetPosition() {
         this.x = this.startPositionX;
         this.y = this.startPositionY;
         this.velocity = 0;
+        this.tiltAngleDegrees = 0;
     }
 
     checkBirdHasPassedNearestPipe(nearestPipe: Pipe) {

@@ -130,4 +130,9 @@ describe("Game", () => {
 
         expect(imagesCoordinates).toBe(0);
     });
+
+    it("If the game is reset, the bird's tilt angle is set to 0", () => {
+        game.reset();
+        expect(game.bird.tiltAngleDegrees).toBe(0);
+    });
 });
